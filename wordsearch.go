@@ -7,7 +7,7 @@ import (
 
 type Direction int64
 
-var alphabet = "abcdefghijklmnopqrstuvwxyz"
+const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 const (
   North Direction = iota
@@ -85,6 +85,40 @@ func BuildWordSearch(inputWords []string) WordSearch{
   }
 
   return WordSearch{graph, words}
+}
+
+func (graph Graph) GetNextPosition(cursorX int, cursorY int, direction Direction) (inBounds bool,  int, newPosY int){
+  switch direction {
+  case North:
+    if cursorX >= len(graph) - 1 || cursorX < -1 {
+      return false, cursorX, cursorY
+    }
+    return true, cursorX + 1, cursorY
+
+  //case NorthEast:
+  //  return "northeast"
+  //case East:
+  //  return "est"
+  //case SouthEast:
+  //  return "southeast"
+  //case South:
+  //  return "south"
+  //case SouthWest:
+  //  return "southwest"
+  //case West:
+  //  return "west"
+  //case NorthWest:
+  //  return "northwest"
+  }
+  return false, -1, -1
+}
+
+func FindWord(graph Graph, word string, cursorX int, cursorY int) (wasFound bool, xOrigin int, yOrigin int, direction Direction){
+  return
+}
+
+func (graph Graph) FindWord(word string) (wasFound bool, xOrigin int, yOrigin int, direction Direction){
+  return FindWord(graph, word, 0, 0);
 }
 
 func main() {
